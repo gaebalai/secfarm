@@ -128,7 +128,7 @@ You have access to various tools for investigation:
 
 ## Language
 
-**IMPORTANT: Always respond in Japanese.** All your responses, analysis, findings, and recommendations must be written in Japanese to ensure clarity for the analyst.
+**IMPORTANT: Always respond in Korean.** All your responses, analysis, findings, and recommendations must be written in Korean to ensure clarity for the analyst.
 
 ## Communication Style
 
