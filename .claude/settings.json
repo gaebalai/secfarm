@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(go get:*)",
+      "Bash(go clean:*)",
+      "Bash(GONOSUMCHECK=*)",
+      "Bash(GONOSUMDB=*)",
+      "Bash(GOFLAGS=-insecure go get github.com/gaebalai/clog@v0.1.0 github.com/gaebalai/goerr/v2@v2.0.1 github.com/gaebalai/gt@v0.2.1)",
+      "Bash(GONOSUMCHECK='*' GONOSUMDB='*' GOINSECURE='*' GOFLAGS='' go get github.com/gaebalai/clog@v0.1.0 github.com/gaebalai/goerr/v2@v2.0.1 github.com/gaebalai/gt@v0.2.1)",
+      "Bash(GONOSUMCHECK='*' GONOSUMDB='*' GOFLAGS='' go mod tidy)",
+      "Bash(go build:*)"
+    ],
+    "additionalDirectories": [
+      "/Users/gaebalai/lecture/secfarm-05-alert-summary"
+    ]
+  }
+}
