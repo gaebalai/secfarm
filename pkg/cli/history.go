@@ -20,7 +20,7 @@ func historyCommand() *cli.Command {
 			Name:        "alert-id",
 			Aliases:     []string{"i"},
 			Usage:       "Alert ID to list conversation histories",
-			Sources:     cli.EnvVars("LEVERET_ALERT_ID"),
+			Sources:     cli.EnvVars("SECFARM_ALERT_ID"),
 			Destination: &alertID,
 			Required:    true,
 		},

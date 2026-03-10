@@ -20,7 +20,7 @@ func searchCommand() *cli.Command {
 			Name:        "query",
 			Aliases:     []string{"q"},
 			Usage:       "Natural language query to search for similar alerts",
-			Sources:     cli.EnvVars("LEVERET_SEARCH_QUERY"),
+			Sources:     cli.EnvVars("SECFARM_SEARCH_QUERY"),
 			Destination: &query,
 			Required:    true,
 		},
@@ -29,7 +29,7 @@ func searchCommand() *cli.Command {
 			Aliases:     []string{"l"},
 			Usage:       "Maximum number of similar alerts to return",
 			Value:       10,
-			Sources:     cli.EnvVars("LEVERET_SEARCH_LIMIT"),
+			Sources:     cli.EnvVars("SECFARM_SEARCH_LIMIT"),
 			Destination: &limit,
 		},
 	}

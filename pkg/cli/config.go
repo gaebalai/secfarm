@@ -35,27 +35,27 @@ func globalFlags(cfg *config) []cli.Flag {
 			Name:        "firestore-project",
 			Aliases:     []string{"p"},
 			Usage:       "Google Cloud project ID for Firestore",
-			Sources:     cli.EnvVars("LEVERET_FIRESTORE_PROJECT"),
+			Sources:     cli.EnvVars("SECFARM_FIRESTORE_PROJECT"),
 			Destination: &cfg.firestoreProject,
 		},
 		&cli.StringFlag{
 			Name:        "firestore-database",
 			Aliases:     []string{"d"},
 			Usage:       "Firestore database ID",
-			Sources:     cli.EnvVars("LEVERET_FIRESTORE_DATABASE_ID"),
+			Sources:     cli.EnvVars("SECFARM_FIRESTORE_DATABASE_ID"),
 			Destination: &cfg.database,
 		},
 		&cli.StringFlag{
 			Name:        "storage-bucket",
 			Aliases:     []string{"b"},
 			Usage:       "Cloud Storage bucket name",
-			Sources:     cli.EnvVars("LEVERET_STORAGE_BUCKET"),
+			Sources:     cli.EnvVars("SECFARM_STORAGE_BUCKET"),
 			Destination: &cfg.bucketName,
 		},
 		&cli.StringFlag{
 			Name:        "storage-prefix",
 			Usage:       "Cloud Storage object key prefix",
-			Sources:     cli.EnvVars("LEVERET_STORAGE_PREFIX"),
+			Sources:     cli.EnvVars("SECFARM_STORAGE_PREFIX"),
 			Destination: &cfg.storagePrefix,
 		},
 	}
@@ -67,28 +67,28 @@ func llmFlags(cfg *config) []cli.Flag {
 		&cli.StringFlag{
 			Name:        "gemini-project",
 			Usage:       "Google Cloud project ID for Gemini API",
-			Sources:     cli.EnvVars("LEVERET_GEMINI_PROJECT"),
+			Sources:     cli.EnvVars("SECFARM_GEMINI_PROJECT"),
 			Destination: &cfg.geminiProject,
 		},
 		&cli.StringFlag{
 			Name:        "gemini-location",
 			Usage:       "Google Cloud location for Gemini API",
 			Value:       "us-central1",
-			Sources:     cli.EnvVars("LEVERET_GEMINI_LOCATION"),
+			Sources:     cli.EnvVars("SECFARM_GEMINI_LOCATION"),
 			Destination: &cfg.geminiLocation,
 		},
 		&cli.StringFlag{
 			Name:        "gemini-generative-model",
 			Usage:       "Gemini generative model name",
 			Value:       "gemini-2.5-flash",
-			Sources:     cli.EnvVars("LEVERET_GEMINI_GENERATIVE_MODEL"),
+			Sources:     cli.EnvVars("SECFARM_GEMINI_GENERATIVE_MODEL"),
 			Destination: &cfg.geminiGenerativeModel,
 		},
 		&cli.StringFlag{
 			Name:        "gemini-embedding-model",
 			Usage:       "Gemini embedding model name",
 			Value:       "gemini-embedding-001",
-			Sources:     cli.EnvVars("LEVERET_GEMINI_EMBEDDING_MODEL"),
+			Sources:     cli.EnvVars("SECFARM_GEMINI_EMBEDDING_MODEL"),
 			Destination: &cfg.geminiEmbeddingModel,
 		},
 	}
@@ -156,7 +156,7 @@ func mcpFlags(cfg *mcpConfig) []cli.Flag {
 		&cli.StringFlag{
 			Name:        "mcp-config",
 			Usage:       "Path to MCP configuration file",
-			Sources:     cli.EnvVars("LEVERET_MCP_CONFIG"),
+			Sources:     cli.EnvVars("SECFARM_MCP_CONFIG"),
 			Destination: &cfg.configPath,
 		},
 	}

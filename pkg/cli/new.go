@@ -38,13 +38,13 @@ func newCommand() *cli.Command {
 			Name:        "input",
 			Aliases:     []string{"i"},
 			Usage:       "Path to JSON file containing alert data",
-			Sources:     cli.EnvVars("LEVERET_INPUT"),
+			Sources:     cli.EnvVars("SECFARM_INPUT"),
 			Destination: &inputPath,
 		},
 		&cli.StringFlag{
 			Name:        "policy-dir",
 			Usage:       "Directory containing Rego policy files",
-			Sources:     cli.EnvVars("LEVERET_POLICY_DIR"),
+			Sources:     cli.EnvVars("SECFARM_POLICY_DIR"),
 			Destination: &policyDir,
 		},
 	}

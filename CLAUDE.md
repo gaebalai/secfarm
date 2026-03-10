@@ -37,17 +37,17 @@ Secfarm is a CLI-based LLM agent for security alert analysis. It receives securi
 
 **CRITICAL**: When implementing CLI commands in `pkg/cli/`, strictly follow these patterns:
 
-1. **Environment Variable Support**: ALL CLI options MUST support environment variables using `cli/v3`'s `Sources` feature with `LEVERET_` prefix:
+1. **Environment Variable Support**: ALL CLI options MUST support environment variables using `cli/v3`'s `Sources` feature with `SECFARM_` prefix:
    ```go
    &cli.StringFlag{
        Name:        "alert-id",
-       Sources:     cli.EnvVars("LEVERET_ALERT_ID"),  // Always use LEVERET_ prefix
+       Sources:     cli.EnvVars("SECFARM_ALERT_ID"),  // Always use SECFARM_ prefix
        Destination: &alertID,
    }
    ```
 
-   **Naming Convention**: All environment variables must use the `LEVERET_` prefix for consistency:
-   - ✅ `LEVERET_PROJECT`, `LEVERET_CLAUDE_API_KEY`, `LEVERET_ALERT_ID`
+   **Naming Convention**: All environment variables must use the `SECFARM_` prefix for consistency:
+   - ✅ `SECFARM_PROJECT`, `SECFARM_CLAUDE_API_KEY`, `SECFARM_ALERT_ID`
    - ❌ `GOOGLE_CLOUD_PROJECT`, `CLAUDE_API_KEY`, `ALERT_ID`
 
 2. **Destination Pattern**: ALWAYS use the `Destination` field to store flag values. NEVER use `c.String()`, `c.Bool()`, `c.Int()` etc. to retrieve values:
@@ -82,7 +82,7 @@ Secfarm is a CLI-based LLM agent for security alert analysis. It receives securi
        flags := []cli.Flag{
            &cli.StringFlag{
                Name:        "alert-id",
-               Sources:     cli.EnvVars("LEVERET_ALERT_ID"),
+               Sources:     cli.EnvVars("SECFARM_ALERT_ID"),
                Destination: &alertID,
                Required:    true,
            },
@@ -219,7 +219,7 @@ secfarm list -a    # Include merged alerts
 ```bash
 secfarm show --alert-id <alert-id>
 # Or using environment variable
-LEVERET_ALERT_ID=abc123 secfarm show
+SECFARM_ALERT_ID=abc123 secfarm show
 ```
 
 Displays detailed information of a specific alert including title, description, attributes, timestamps, and metadata.
@@ -240,7 +240,7 @@ secfarm search --query "AWS S3 bucket access denied" --limit 10
 ```bash
 secfarm resolve --alert-id <alert-id> --conclusion false_positive --note "Verified safe"
 # Or using environment variables
-LEVERET_ALERT_ID=abc123 LEVERET_RESOLVE_CONCLUSION=false_positive secfarm resolve
+SECFARM_ALERT_ID=abc123 SECFARM_RESOLVE_CONCLUSION=false_positive secfarm resolve
 ```
 
 Available conclusions: `unaffected`, `false_positive`, `true_positive`, `inconclusive`
@@ -250,11 +250,11 @@ Available conclusions: `unaffected`, `false_positive`, `true_positive`, `inconcl
 ```bash
 secfarm merge --source-id <source-id> --target-id <target-id>
 # Or using environment variables
-LEVERET_MERGE_SOURCE_ID=abc123 LEVERET_MERGE_TARGET_ID=def456 secfarm merge
+SECFARM_MERGE_SOURCE_ID=abc123 SECFARM_MERGE_TARGET_ID=def456 secfarm merge
 
 secfarm unmerge --alert-id <alert-id>
 # Or using environment variable
-LEVERET_ALERT_ID=abc123 secfarm unmerge
+SECFARM_ALERT_ID=abc123 secfarm unmerge
 ```
 
 ## Development Commands
@@ -270,7 +270,7 @@ go run ./cmd/secfarm --help
 go run ./cmd/secfarm new -i testdata/alert.json
 
 # Run with environment variables
-LEVERET_FIRESTORE_PROJECT=your-project LEVERET_GEMINI_PROJECT=your-project go run ./cmd/secfarm new -i alert.json
+SECFARM_FIRESTORE_PROJECT=your-project SECFARM_GEMINI_PROJECT=your-project go run ./cmd/secfarm new -i alert.json
 ```
 
 ### Testing
@@ -314,58 +314,58 @@ golangci-lint run
 
 ## Environment Setup
 
-All environment variables use the `LEVERET_` prefix for consistency.
+All environment variables use the `SECFARM_` prefix for consistency.
 
 ### Global Configuration
 
 | Variable | Description | Default | Required |
 |----------|-------------|---------|----------|
-| `LEVERET_LOG_LEVEL` | Log level (debug, info, warn, error) | "info" | No |
-| `LEVERET_VERBOSE` | Enable verbose mode (show stack traces) | false | No |
-| `LEVERET_FIRESTORE_PROJECT` | Google Cloud project ID for Firestore | - | Yes |
-| `LEVERET_FIRESTORE_DATABASE_ID` | Firestore database ID | "(default)" | No |
-| `LEVERET_STORAGE_BUCKET` | Cloud Storage bucket name | - | Yes (for chat) |
-| `LEVERET_STORAGE_PREFIX` | Cloud Storage object key prefix | - | No |
+| `SECFARM_LOG_LEVEL` | Log level (debug, info, warn, error) | "info" | No |
+| `SECFARM_VERBOSE` | Enable verbose mode (show stack traces) | false | No |
+| `SECFARM_FIRESTORE_PROJECT` | Google Cloud project ID for Firestore | - | Yes |
+| `SECFARM_FIRESTORE_DATABASE_ID` | Firestore database ID | "(default)" | No |
+| `SECFARM_STORAGE_BUCKET` | Cloud Storage bucket name | - | Yes (for chat) |
+| `SECFARM_STORAGE_PREFIX` | Cloud Storage object key prefix | - | No |
 
 ### LLM Configuration
 
 | Variable | Description | Default | Required |
 |----------|-------------|---------|----------|
-| `LEVERET_GEMINI_PROJECT` | Google Cloud project ID for Gemini | - | Yes |
-| `LEVERET_GEMINI_LOCATION` | Google Cloud location for Gemini | "us-central1" | No |
+| `SECFARM_GEMINI_PROJECT` | Google Cloud project ID for Gemini | - | Yes |
+| `SECFARM_GEMINI_LOCATION` | Google Cloud location for Gemini | "us-central1" | No |
 
 ### MCP Configuration
 
 | Variable | Description | Default | Required |
 |----------|-------------|---------|----------|
-| `LEVERET_MCP_CONFIG` | Path to MCP configuration file | - | No |
-| `LEVERET_OTX_API_KEY` | OTX API key for threat intelligence | - | No |
+| `SECFARM_MCP_CONFIG` | Path to MCP configuration file | - | No |
+| `SECFARM_OTX_API_KEY` | OTX API key for threat intelligence | - | No |
 
 ### BigQuery Configuration
 
 | Variable | Description | Default | Required |
 |----------|-------------|---------|----------|
-| `LEVERET_BIGQUERY_PROJECT` | Google Cloud project ID for BigQuery | - | No |
-| `LEVERET_BIGQUERY_RUNBOOK_DIR` | Directory containing SQL runbook files | - | No |
-| `LEVERET_BIGQUERY_SCAN_LIMIT_MB` | Maximum scan limit in MB for dry-run validation | 1024 | No |
-| `LEVERET_BIGQUERY_RESULT_STORAGE_BUCKET` | Cloud Storage bucket for query results | - | No |
-| `LEVERET_BIGQUERY_RESULT_STORAGE_PREFIX` | Cloud Storage prefix for query results | - | No |
+| `SECFARM_BIGQUERY_PROJECT` | Google Cloud project ID for BigQuery | - | No |
+| `SECFARM_BIGQUERY_RUNBOOK_DIR` | Directory containing SQL runbook files | - | No |
+| `SECFARM_BIGQUERY_SCAN_LIMIT_MB` | Maximum scan limit in MB for dry-run validation | 1024 | No |
+| `SECFARM_BIGQUERY_RESULT_STORAGE_BUCKET` | Cloud Storage bucket for query results | - | No |
+| `SECFARM_BIGQUERY_RESULT_STORAGE_PREFIX` | Cloud Storage prefix for query results | - | No |
 
 ### Command-Specific Variables
 
 | Variable | Command | Description |
 |----------|---------|-------------|
-| `LEVERET_INPUT` | new | Input file path |
-| `LEVERET_ALERT_ID` | show, chat, resolve, unmerge | Alert ID |
-| `LEVERET_LIST_ALL` | list | Include merged alerts |
-| `LEVERET_LIST_OFFSET` | list | Pagination offset |
-| `LEVERET_LIST_LIMIT` | list | Maximum results |
-| `LEVERET_SEARCH_QUERY` | search | Natural language query |
-| `LEVERET_SEARCH_LIMIT` | search | Maximum results |
-| `LEVERET_RESOLVE_CONCLUSION` | resolve | Conclusion type |
-| `LEVERET_RESOLVE_NOTE` | resolve | Additional note |
-| `LEVERET_MERGE_SOURCE_ID` | merge | Source alert ID |
-| `LEVERET_MERGE_TARGET_ID` | merge | Target alert ID |
+| `SECFARM_INPUT` | new | Input file path |
+| `SECFARM_ALERT_ID` | show, chat, resolve, unmerge | Alert ID |
+| `SECFARM_LIST_ALL` | list | Include merged alerts |
+| `SECFARM_LIST_OFFSET` | list | Pagination offset |
+| `SECFARM_LIST_LIMIT` | list | Maximum results |
+| `SECFARM_SEARCH_QUERY` | search | Natural language query |
+| `SECFARM_SEARCH_LIMIT` | search | Maximum results |
+| `SECFARM_RESOLVE_CONCLUSION` | resolve | Conclusion type |
+| `SECFARM_RESOLVE_NOTE` | resolve | Additional note |
+| `SECFARM_MERGE_SOURCE_ID` | merge | Source alert ID |
+| `SECFARM_MERGE_TARGET_ID` | merge | Target alert ID |
 
 ### Additional Setup
 
@@ -394,7 +394,7 @@ servers:
 
 Specify the config file:
 - CLI flag: `--mcp-config /path/to/mcp-config.yaml`
-- Environment variable: `LEVERET_MCP_CONFIG=/path/to/mcp-config.yaml`
+- Environment variable: `SECFARM_MCP_CONFIG=/path/to/mcp-config.yaml`
 
 ### Supported Transports
 
@@ -417,11 +417,11 @@ Secfarm supports BigQuery as a tool for querying log data during chat analysis. 
 ### Configuration
 
 Set the following environment variables or CLI flags:
-- `LEVERET_BIGQUERY_PROJECT`: Google Cloud project ID for BigQuery
-- `LEVERET_BIGQUERY_RUNBOOK_DIR`: Directory containing SQL runbook files (optional)
-- `LEVERET_BIGQUERY_SCAN_LIMIT_MB`: Maximum data scan limit in MB (default: 1024)
-- `LEVERET_BIGQUERY_RESULT_STORAGE_BUCKET`: Cloud Storage bucket for storing query results
-- `LEVERET_BIGQUERY_RESULT_STORAGE_PREFIX`: Prefix for result objects in Cloud Storage (optional)
+- `SECFARM_BIGQUERY_PROJECT`: Google Cloud project ID for BigQuery
+- `SECFARM_BIGQUERY_RUNBOOK_DIR`: Directory containing SQL runbook files (optional)
+- `SECFARM_BIGQUERY_SCAN_LIMIT_MB`: Maximum data scan limit in MB (default: 1024)
+- `SECFARM_BIGQUERY_RESULT_STORAGE_BUCKET`: Cloud Storage bucket for storing query results
+- `SECFARM_BIGQUERY_RESULT_STORAGE_PREFIX`: Prefix for result objects in Cloud Storage (optional)
 
 ### Available Tools
 
@@ -466,7 +466,7 @@ ORDER BY
 LIMIT 100
 ```
 
-- Place runbook files in the directory specified by `LEVERET_BIGQUERY_RUNBOOK_DIR`
+- Place runbook files in the directory specified by `SECFARM_BIGQUERY_RUNBOOK_DIR`
 - Runbook IDs are automatically generated from filenames (without .sql extension)
 - Title and description are extracted from `-- title:` and `-- description:` comments
 

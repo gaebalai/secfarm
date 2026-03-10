@@ -61,7 +61,7 @@ secfarm chat --mcp-config examples/mcp-config/config.yaml --alert-id <your-alert
 Or set environment variable:
 
 ```bash
-export LEVERET_MCP_CONFIG=examples/mcp-config/config.yaml
+export SECFARM_MCP_CONFIG=examples/mcp-config/config.yaml
 secfarm chat --alert-id <your-alert-id>
 ```
 

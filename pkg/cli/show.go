@@ -22,7 +22,7 @@ func showCommand() *cli.Command {
 			Name:        "alert-id",
 			Aliases:     []string{"i"},
 			Usage:       "Alert ID to show",
-			Sources:     cli.EnvVars("LEVERET_ALERT_ID"),
+			Sources:     cli.EnvVars("SECFARM_ALERT_ID"),
 			Destination: (*string)(&alertID),
 			Required:    true,
 		},

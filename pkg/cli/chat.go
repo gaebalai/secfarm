@@ -39,14 +39,14 @@ func chatCommand() *cli.Command {
 			Name:        "alert-id",
 			Aliases:     []string{"i"},
 			Usage:       "Alert ID to chat with",
-			Sources:     cli.EnvVars("LEVERET_ALERT_ID"),
+			Sources:     cli.EnvVars("SECFARM_ALERT_ID"),
 			Destination: (*string)(&alertID),
 			Required:    true,
 		},
 		&cli.StringFlag{
 			Name:        "environment-info",
 			Usage:       "Environment context information for better analysis",
-			Sources:     cli.EnvVars("LEVERET_ENVIRONMENT_INFO"),
+			Sources:     cli.EnvVars("SECFARM_ENVIRONMENT_INFO"),
 			Destination: &environmentInfo,
 		},
 	}

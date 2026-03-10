@@ -46,33 +46,33 @@ func (t *Tool) Flags() []cli.Flag {
 		&cli.StringFlag{
 			Name:        "bigquery-project",
 			Usage:       "Google Cloud project ID for BigQuery",
-			Sources:     cli.EnvVars("LEVERET_BIGQUERY_PROJECT"),
+			Sources:     cli.EnvVars("SECFARM_BIGQUERY_PROJECT"),
 			Destination: &t.project,
 		},
 		&cli.StringFlag{
 			Name:        "bigquery-runbook-dir",
 			Usage:       "Directory containing SQL runbook files",
-			Sources:     cli.EnvVars("LEVERET_BIGQUERY_RUNBOOK_DIR"),
+			Sources:     cli.EnvVars("SECFARM_BIGQUERY_RUNBOOK_DIR"),
 			Destination: &t.runBookDir,
 		},
 		&cli.StringFlag{
 			Name:        "bigquery-config-file",
 			Usage:       "Configuration file containing BigQuery table definitions",
-			Sources:     cli.EnvVars("LEVERET_BIGQUERY_CONFIG_FILE"),
+			Sources:     cli.EnvVars("SECFARM_BIGQUERY_CONFIG_FILE"),
 			Destination: &t.configFile,
 		},
 		&cli.IntFlag{
 			Name:        "bigquery-scan-limit-mb",
 			Usage:       "Maximum scan limit in MB for dry-run validation",
 			Value:       10240,
-			Sources:     cli.EnvVars("LEVERET_BIGQUERY_SCAN_LIMIT_MB"),
+			Sources:     cli.EnvVars("SECFARM_BIGQUERY_SCAN_LIMIT_MB"),
 			Destination: &t.scanLimitMB,
 		},
 		&cli.IntFlag{
 			Name:        "bigquery-result-limit-rows",
 			Usage:       "Maximum number of rows to return per query result request",
 			Value:       1000,
-			Sources:     cli.EnvVars("LEVERET_BIGQUERY_RESULT_LIMIT_ROWS"),
+			Sources:     cli.EnvVars("SECFARM_BIGQUERY_RESULT_LIMIT_ROWS"),
 			Destination: &t.resultLimitRows,
 		},
 	}

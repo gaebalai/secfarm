@@ -1,5 +1,5 @@
 # MCP configuration for log search server example
-# Specify this file with --mcp-config flag or LEVERET_MCP_CONFIG environment variable
+# Specify this file with --mcp-config flag or SECFARM_MCP_CONFIG environment variable
 
 servers:
   - name: log-search

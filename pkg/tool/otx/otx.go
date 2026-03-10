@@ -66,7 +66,7 @@ func (x *otx) Flags() []cli.Flag {
 	return []cli.Flag{
 		&cli.StringFlag{
 			Name:        "otx-api-key",
-			Sources:     cli.EnvVars("LEVERET_OTX_API_KEY"),
+			Sources:     cli.EnvVars("SECFARM_OTX_API_KEY"),
 			Usage:       "OTX API key",
 			Destination: &x.apiKey,
 		},
