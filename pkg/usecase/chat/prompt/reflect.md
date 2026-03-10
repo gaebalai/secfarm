@@ -264,7 +264,7 @@ Examples of CORRECT handling:
   - Only add new steps if the findings revealed truly NEW leads (not alternatives to failures)
 
 **IMPORTANT**:
-- All text fields must be in Japanese (output language)
+- All text fields must be in Korean (output language)
 - Be conservative with plan updates - only suggest when truly necessary
 - Focus on evidence gaps and new investigation paths
 - If no updates needed, use empty array for plan_updates

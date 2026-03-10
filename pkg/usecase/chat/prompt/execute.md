@@ -79,7 +79,7 @@ If the step asks you to do something that no available tool can do, report that 
 - Stop when you have sufficient information to meet the expected outcome
 
 **IMPORTANT**:
-- Respond in Japanese
+- Respond in Korean
 - Focus on this specific step's objective
 - Don't jump ahead to other steps
 - Gather facts before making assessments

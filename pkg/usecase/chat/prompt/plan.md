@@ -188,7 +188,7 @@ Return your plan in JSON format with this exact structure:
 ```
 
 **IMPORTANT**:
-- Use Japanese for all text fields (objective, description, expected)
+- Use Korean for all text fields (objective, description, expected)
 - **Always specify tools array** - never leave it empty
 - **Only use tools from the "Available Tools" list** - do NOT use tools that are not listed
 - If a necessary tool is not available, adapt the step or skip that investigation angle

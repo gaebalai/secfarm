@@ -40,7 +40,7 @@ You have completed all steps of the task. Now synthesize the findings into a com
 Generate a comprehensive conclusion that synthesizes all findings in markdown format.
 
 **Guidelines**:
-- Write in Japanese
+- Write in Korean
 - Structure the content appropriately based on the task objective
 - Be specific and evidence-based
 - Clearly separate facts from interpretation
@@ -57,7 +57,7 @@ Generate a comprehensive conclusion that synthesizes all findings in markdown fo
 
 ## Response Format
 
-Respond directly with markdown-formatted text in Japanese. Do not wrap it in JSON.
+Respond directly with markdown-formatted text in Korean. Do not wrap it in JSON.
 
 **Example**:
 ```
@@ -75,7 +75,7 @@ Respond directly with markdown-formatted text in Japanese. Do not wrap it in JSO
 ```
 
 **IMPORTANT**:
-- Write in Japanese
+- Write in Korean
 - Use markdown formatting
 - Structure the content appropriately for the task
 - Include specific evidence and details
